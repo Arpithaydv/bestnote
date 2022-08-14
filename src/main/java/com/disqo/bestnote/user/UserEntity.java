@@ -1,21 +1,23 @@
 package com.disqo.bestnote.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
-    private Long id;
-    private String firstName;
-    private String lastName;
+@Entity
+@Table
+public class UserEntity {
+    @Id
     private String email;
+    @NonNull
+    private String password;
     private Timestamp createTime;
     private Timestamp lastUpdateTime;
 }
