@@ -1,13 +1,12 @@
 package com.disqo.bestnote.user;
 
-import com.disqo.bestnote.note.Note;
-import com.disqo.bestnote.note.NoteRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +14,14 @@ import java.util.List;
 public class UserConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(UserEntityRepository userEntityRepository) {
+    CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return args -> {
-            UserEntity user1 = new UserEntity("john.doe@xyz.com","passwordencruyted", Timestamp.from(Instant.EPOCH), Timestamp.from(Instant.EPOCH));
-            UserEntity user2 = new UserEntity("emma.doe@xyz.com","passwordencruytedForEmma", Timestamp.from(Instant.EPOCH), Timestamp.from(Instant.EPOCH));
-            List<UserEntity> userEntities = new ArrayList<>();
+            User user1 = new User("user1@domain.com","user1encryptedpassword", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+            User user2 = new User("user2@domain.com","user2encryptedpassword", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+            List<User> userEntities = new ArrayList<>();
             userEntities.add(user1);
             userEntities.add(user2);
-            userEntityRepository.saveAllAndFlush(userEntities);
+            userRepository.saveAllAndFlush(userEntities);
         };
     }
 }

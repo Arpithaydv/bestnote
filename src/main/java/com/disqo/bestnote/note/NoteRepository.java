@@ -1,9 +1,12 @@
 package com.disqo.bestnote.note;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
-public interface NoteRepository extends JpaRepository<Note, Long> {
-
+public interface NoteRepository extends JpaRepository<Note, String> {
+    @Query(value = "SELECT n FROM note n WHERE n.email_id = ?1")
+    List<Note> listAllNotesByEmailId(String emailId);
 }
