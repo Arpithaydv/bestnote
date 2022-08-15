@@ -1,12 +1,15 @@
-package com.disqo.bestnote.user;
+package entity;
 
-import com.disqo.bestnote.note.Note;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,5 +27,4 @@ public class User {
     private Timestamp createTime;
     @Column(name = "last_update_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp lastUpdateTime;
-
 }

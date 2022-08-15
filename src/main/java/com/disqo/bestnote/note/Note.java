@@ -22,9 +22,9 @@ public class Note {
     private Timestamp createTime;
     @Column(name = "last_update_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp lastUpdateTime;
-//    @ManyToOne
-//    @JoinColumn(name="email_id", nullable = false)
-    private String emailId;
+    @ManyToOne
+    @JoinColumn(name="email_id", nullable = false)
+    private User user;
 
 
     public Note(String title, String notes, Timestamp createTime, Timestamp lastUpdateTime) {

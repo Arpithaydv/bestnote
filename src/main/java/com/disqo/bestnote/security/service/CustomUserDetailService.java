@@ -19,14 +19,14 @@ public class CustomUserDetailService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.getUserById(username);
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+        User user = userService.getUserById(userEmail);
         CustomUserDetails userDetails = new CustomUserDetails();
         if(user != null) {
             userDetails.setUser(user);
             return userDetails;
         } else {
-            throw new UsernameNotFoundException("User does not exists with email: " + username);
+            throw new UsernameNotFoundException("User does not exists with email: " + userEmail);
         }
 
     }

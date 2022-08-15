@@ -35,10 +35,10 @@ public class NoteController {
     @PostMapping
     public ResponseEntity<Note> addNote(@RequestBody NoteDTO noteDTO) {
         try{
-            if(noteDTO.getEmailId() == null || noteDTO.getTitle() == null) {
+            if(noteDTO.getUser() == null || noteDTO.getTitle() == null) {
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
-            User userById = userService.getUserById(noteDTO.getEmailId());
+            User userById = userService.getUserById(noteDTO.getUser().getEmailId());
             if(userById != null) {
                 Note noteByTitle = noteService.getNoteByTitle(noteDTO.getTitle());
                 if(noteByTitle != null) {
@@ -55,12 +55,12 @@ public class NoteController {
     @PutMapping
     public ResponseEntity<Note> updateNote(@RequestBody NoteDTO noteDTO) {
         try{
-            if(noteDTO.getEmailId() == null || noteDTO.getTitle() == null) {
+            if(noteDTO.getUser() == null || noteDTO.getTitle() == null) {
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
-            User userById = userService.getUserById(noteDTO.getEmailId());
+            User userById = userService.getUserById(noteDTO.getUser().getEmailId());
             Note noteByTitle = noteService.getNoteByTitle(noteDTO.getTitle());
-            if(userById.getEmailId().equals(noteByTitle.getEmailId())) {
+            if(Objects.equals(userById.getEmailId(), noteByTitle.getUser().getEmailId())) {
                 noteByTitle.setNotes(noteDTO.getNotes());
                 return new ResponseEntity<>(noteService.updateNote(noteByTitle), HttpStatus.OK);
             } else {
@@ -76,7 +76,7 @@ public class NoteController {
     public ResponseEntity<HttpStatus> deleteNote(@PathVariable(value="title") String noteTitle, @PathVariable(value = "emailId") String emailId) {
         try{
             Note noteByTitle = noteService.getNoteByTitle(noteTitle);
-            if(!Objects.equals(noteByTitle.getEmailId(), emailId)) {
+            if(!Objects.equals(noteByTitle.getUser(), emailId)) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
             noteService.deleteNote(noteTitle);

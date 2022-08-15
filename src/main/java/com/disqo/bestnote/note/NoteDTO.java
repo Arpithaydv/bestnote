@@ -1,4 +1,5 @@
 package com.disqo.bestnote.note;
+import com.disqo.bestnote.user.UserDTO;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -10,7 +11,7 @@ public class NoteDTO {
     private String notes;
     private Timestamp createTime;
     private Timestamp lastUpdateTime;
-    private String emailId;
+    private UserDTO user;
 
 
     public Note toEntity() {
@@ -21,7 +22,7 @@ public class NoteDTO {
         else note.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
         if(this.lastUpdateTime != null) note.setLastUpdateTime(this.getLastUpdateTime());
         else note.setLastUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
-        if(this.getEmailId() != null) note.setEmailId(this.getEmailId());
+        if(this.getUser() != null) note.setUser(this.getUser().toEntity());
         return note;
     }
 }
