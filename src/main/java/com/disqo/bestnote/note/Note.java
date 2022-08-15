@@ -14,9 +14,9 @@ import java.sql.Timestamp;
 @Table(name = "note")
 public class Note {
     @Id
-    @Column(name = "title", length=50)
+    @Column(name = "title",columnDefinition="text", length=50)
     private String title;
-    @Column(name = "notes", length=1000)
+    @Column(name = "notes",columnDefinition="text", length=1000)
     private String notes;
     @Column(name = "create_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createTime;

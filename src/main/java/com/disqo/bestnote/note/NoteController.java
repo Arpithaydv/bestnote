@@ -4,7 +4,6 @@ package com.disqo.bestnote.note;
 import com.disqo.bestnote.user.User;
 import com.disqo.bestnote.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +40,10 @@ public class NoteController {
             }
             User userById = userService.getUserById(noteDTO.getEmailId());
             if(userById != null) {
+                Note noteByTitle = noteService.getNoteByTitle(noteDTO.getTitle());
+                if(noteByTitle != null) {
+                    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+                }
                 return new ResponseEntity<>(noteService.addNewNoteForUser(noteDTO.toEntity()), HttpStatus.CREATED);
             }
             return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);

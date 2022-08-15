@@ -29,11 +29,6 @@ public class NoteService {
     }
 
     public Note addNewNoteForUser(Note note) {
-        Optional<Note> noteOptional = noteRepository.findById(note.getTitle());
-        if(noteOptional.isPresent()) {
-            //note title already taken
-            return null;
-        }
         return noteRepository.saveAndFlush(note);
     }
 
