@@ -72,11 +72,11 @@ public class NoteController {
 
     }
 
-    @DeleteMapping("/{emailId}/{title}")
-    public ResponseEntity<HttpStatus> deleteNote(@PathVariable(value="title") String noteTitle, @PathVariable(value = "emailId") String emailId) {
+    @DeleteMapping("/delete-note")
+    public ResponseEntity<HttpStatus> deleteNote(@RequestParam(value="title") String noteTitle, @RequestParam(value = "emailId") String emailId) {
         try{
             Note noteByTitle = noteService.getNoteByTitle(noteTitle);
-            if(!Objects.equals(noteByTitle.getUser(), emailId)) {
+            if(noteByTitle == null || !Objects.equals(noteByTitle.getUser().getEmailId(), emailId)) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
             noteService.deleteNote(noteTitle);

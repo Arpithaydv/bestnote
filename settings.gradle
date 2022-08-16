@@ -1,2 +1,1 @@
 rootProject.name = 'bestnote'
-include 'OAuth-authorization-server'

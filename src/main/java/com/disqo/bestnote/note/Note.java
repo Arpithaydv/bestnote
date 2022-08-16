@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Table(name = "note")
 public class Note {
     @Id
-    @Column(name = "title",columnDefinition="text", length=50)
+    @Column(name = "title",columnDefinition="text", length=50, nullable = false, unique = true)
     private String title;
     @Column(name = "notes",columnDefinition="text", length=1000)
     private String notes;
